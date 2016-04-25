@@ -13,5 +13,5 @@ new-migration [Name]
 ```
 Uruchomienie migracji do LocalDb:
 ```
-Start-Migrations
+start-migrations
 ```
