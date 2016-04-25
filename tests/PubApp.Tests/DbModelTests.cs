@@ -16,7 +16,7 @@ namespace PubApp.Tests
                 var comparer = new CompareEfSql();
                 var status = comparer.CompareEfWithDb(ctx);
 
-                status.IsValid.ShouldBe(true, GetErrorMessage(status));
+                status.IsValid.ShouldBeTrue(GetErrorMessage(status));
             }
         }
 
@@ -28,7 +28,7 @@ namespace PubApp.Tests
                 var comparer = new CompareSqlSql();
                 var status = comparer.CompareEfGeneratedSqlToSql(ctx, "DbConnection");
 
-                status.IsValid.ShouldBe(true, GetErrorMessage(status));
+                status.IsValid.ShouldBeTrue(GetErrorMessage(status));
             }
         }
 
