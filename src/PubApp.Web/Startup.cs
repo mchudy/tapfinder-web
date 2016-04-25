@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Microsoft.Owin;
 using Owin;
+using PubApp.Web.Infrastructure;
 
 [assembly: OwinStartup(typeof(PubApp.Web.Startup))]
 namespace PubApp.Web
