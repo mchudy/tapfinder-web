@@ -15,3 +15,7 @@ Uruchomienie migracji do LocalDb:
 ```
 start-migrations
 ```
+lub lepiej z cmd (builduje i uruchamia testy wczesniej)
+```
+./build.cmd migrate
+```

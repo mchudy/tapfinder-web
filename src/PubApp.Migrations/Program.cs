@@ -1,6 +1,7 @@
 ﻿using DbUp;
 using System;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 
@@ -12,6 +13,9 @@ namespace PubApp.Migrations
         {
             var connectionString = args.FirstOrDefault(a => a.Trim() != "--fromconsole") ??
                 ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+
+            var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
+            Console.WriteLine($"Running migration on {connectionStringBuilder.DataSource}");
 
             var upgrader =
                 DeployChanges.To
