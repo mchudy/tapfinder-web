@@ -19,10 +19,11 @@ let defaultConnectionString = "DbConnection"
 
 let migrationsProgram = buildDir + "/PubApp.Migrations.exe"
 
+let awsDeploy = findToolInSubPath "awsDeploy.bat" "tools"
 let cttTool = findToolInSubPath "ctt.exe" "tools"
 let xunitTool = findToolInSubPath "xunit.console.exe" "packages"
 
-let deploymentMisc = [ transformedConfig ]
+let deploymentMisc = [ "appspec.yml"; transformedConfig ]
 
 let exec program args =
     directExec (fun si ->
@@ -85,6 +86,10 @@ Target "Deploy" (fun _ ->
 
     trace "Copying tools and misc files"
     deploymentMisc  |> CopyTo deployDir
+
+    trace "Running AWS deployment script"
+    let result = exec awsDeploy ""
+    if not result then failwith "Could not deploy to AWS"
 )
 
 Target "Default" DoNothing

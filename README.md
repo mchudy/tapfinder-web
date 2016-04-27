@@ -1,3 +1,5 @@
+IP serwera: 52.28.249.181
+
 ### Baza
 Stworzenie LocalDb:
 ```
