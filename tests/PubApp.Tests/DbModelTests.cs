@@ -1,7 +1,7 @@
 ﻿using Ef6SchemaCompare;
+using FluentAssertions;
 using GenericLibsBase;
 using PubApp.DataAccess;
-using Shouldly;
 using Xunit;
 
 namespace PubApp.Tests
@@ -16,7 +16,7 @@ namespace PubApp.Tests
                 var comparer = new CompareEfSql();
                 var status = comparer.CompareEfWithDb(ctx);
 
-                status.IsValid.ShouldBeTrue(GetErrorMessage(status));
+                status.IsValid.Should().BeTrue(GetErrorMessage(status));
             }
         }
 
@@ -28,7 +28,7 @@ namespace PubApp.Tests
                 var comparer = new CompareSqlSql();
                 var status = comparer.CompareEfGeneratedSqlToSql(ctx, "DbConnection");
 
-                status.IsValid.ShouldBeTrue(GetErrorMessage(status));
+                status.IsValid.Should().BeTrue(GetErrorMessage(status));
             }
         }
 

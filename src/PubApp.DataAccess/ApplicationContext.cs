@@ -1,8 +1,11 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using PubApp.DataAccess.Entities;
+using System.Data.Entity;
 
 namespace PubApp.DataAccess
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext
+        : IdentityDbContext<User, AppRole, int, AppUserLogin, AppUserRole, AppUserClaim>
     {
         public ApplicationContext()
             : base("name=DbConnection")

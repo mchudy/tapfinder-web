@@ -30,7 +30,7 @@ let exec program args =
         si.FileName <- program
         si.Arguments <- args)
 
-let transformConfig source transformation destination = 
+let transformConfig source transformation destination =
     let args =
         sprintf """s:"%s" t:"%s" d:"%s" """
             (fullPath source) (fullPath transformation) (fullPath destination)
@@ -41,7 +41,7 @@ Target "Clean" (fun _ ->
     CleanDirs [buildDir; testDir]
 )
 
-Target "BuildTests" (fun _ -> 
+Target "BuildTests" (fun _ ->
     !! "tests/**/*.csproj"
         |> MSBuildRelease testDir "Build"
         |> Log "TestBuild-Output: "
@@ -55,8 +55,8 @@ Target "BuildApp" (fun _ ->
 
 Target "Test" (fun _ ->
       !! (testDir + "/PubApp.*Tests.dll")
-        |> xUnit2 (fun p -> 
-            {p with 
+        |> xUnit2 (fun p ->
+            {p with
                 ShadowCopy = false;
                 HtmlOutputPath = Some (testDir @@ "testResults.html");
                 ToolPath = xunitTool;
@@ -77,7 +77,7 @@ Target "Migrate" (fun _ ->
     if not result then failwith "Error running migrations"
 )
 
-Target "Deploy" (fun _ -> 
+Target "Deploy" (fun _ ->
     CleanDir deployDir
     ensureDirectory deployDir
 
@@ -98,13 +98,15 @@ Target "Default" DoNothing
     ==> "BuildApp"
     ==> "BuildTests"
     ==> "Test"
-    =?> ("TransformConfig", hasBuildParam "prod")
-    ==> "Migrate"
 
 "Test"
-    ==> "TransformConfig" 
+    ==> "TransformConfig"
     ==> "Deploy"
 
 "Test" ==> "Default"
+
+"BuildApp"
+    =?> ("TransformConfig", hasBuildParam "prod")
+    ==> "Migrate"
 
 RunTargetOrDefault "Default"

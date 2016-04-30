@@ -11,6 +11,7 @@ namespace PubApp.Web.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterApiControllers(typeof(Startup).Assembly);
+            builder.RegisterModule<IdentityModule>();
             builder.RegisterAssemblyModules(typeof(ApplicationContext).Assembly);
             builder.RegisterType<NLogExceptionLogger>()
                 .AsImplementedInterfaces()
