@@ -17,6 +17,7 @@ namespace PubApp.Web
             appBuilder.UseAutofacMiddleware(container);
 
             WebApiConfig.Configure(appBuilder, container);
+            AuthConfig.ConfigureAuth(appBuilder);
             MappingsConfig.ConfigureMappings();
         }
     }

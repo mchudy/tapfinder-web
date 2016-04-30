@@ -2,6 +2,7 @@
 using Autofac.Core;
 using Autofac.Integration.WebApi;
 using PubApp.DataAccess;
+using PubApp.Web.Services;
 using System.Linq;
 
 namespace PubApp.Web.Infrastructure
@@ -16,6 +17,9 @@ namespace PubApp.Web.Infrastructure
             builder.RegisterType<NLogExceptionLogger>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
+            builder.RegisterType<UsersService>()
+                .AsSelf()
+                .InstancePerRequest();
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry,

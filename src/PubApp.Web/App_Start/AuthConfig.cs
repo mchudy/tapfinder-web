@@ -12,7 +12,7 @@ namespace PubApp.Web
 
         public static string PublicClientId { get; private set; }
 
-        public void ConfigureAuth(IAppBuilder app)
+        public static void ConfigureAuth(IAppBuilder app)
         {
             PublicClientId = "self";
             OAuthOptions = new OAuthAuthorizationServerOptions
