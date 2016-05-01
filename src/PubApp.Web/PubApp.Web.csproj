@@ -176,11 +176,12 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\MappingsConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\ChangePasswordDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GeoHelper.cs" />
     <Compile Include="Infrastructure\ApplicationOAuthProvider.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\AppModule.cs" />

@@ -9,12 +9,10 @@ namespace PubApp.Web.Services
     public class UsersService
     {
         private readonly ApplicationUserManager userManager;
-        private readonly User currentUser;
 
-        public UsersService(ApplicationUserManager userManager, User currentUser)
+        public UsersService(ApplicationUserManager userManager)
         {
             this.userManager = userManager;
-            this.currentUser = currentUser;
         }
 
         public async Task<bool> RegisterUser(UserRegisterDto registerData)
@@ -24,9 +22,9 @@ namespace PubApp.Web.Services
             return result.Succeeded;
         }
 
-        public async Task<bool> ChangePassword(ChangePasswordDto dto)
+        public async Task<bool> ChangePassword(ChangePasswordDto dto, int currentUserId)
         {
-            var result = await userManager.ChangePasswordAsync(currentUser.Id, dto.OldPassword, dto.NewPassword);
+            var result = await userManager.ChangePasswordAsync(currentUserId, dto.OldPassword, dto.NewPassword);
             return result.Succeeded;
         }
     }

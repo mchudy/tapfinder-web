@@ -1,4 +1,5 @@
-﻿using PubApp.Web.Dtos;
+﻿using Microsoft.AspNet.Identity;
+using PubApp.Web.Dtos;
 using PubApp.Web.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -15,6 +16,7 @@ namespace PubApp.Web.Controllers
             this.usersService = usersService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("")]
         public async Task<IHttpActionResult> RegisterUser(UserRegisterDto dto)
@@ -38,7 +40,7 @@ namespace PubApp.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!await usersService.ChangePassword(dto))
+            if (!await usersService.ChangePassword(dto, User.Identity.GetUserId<int>()))
             {
                 return BadRequest();
             }
