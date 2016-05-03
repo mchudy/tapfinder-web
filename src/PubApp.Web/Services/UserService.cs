@@ -27,5 +27,15 @@ namespace PubApp.Web.Services
             var result = await userManager.ChangePasswordAsync(currentUserId, dto.OldPassword, dto.NewPassword);
             return result.Succeeded;
         }
+
+        public async Task<User> FindByEmail(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<User> FindByName(string username)
+        {
+            return await userManager.FindByNameAsync(username);
+        }
     }
 }

@@ -32,6 +32,28 @@ namespace PubApp.Web.Controllers
             return Ok();
         }
 
+        [HttpHead]
+        [Route("")]
+        public async Task<IHttpActionResult> CheckUsernameAvailability([FromUri] string username)
+        {
+            if (await usersService.FindByName(username) == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
+        [HttpHead]
+        [Route("")]
+        public async Task<IHttpActionResult> CheckEmailAvailability([FromUri] string email)
+        {
+            if (await usersService.FindByEmail(email) == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
         [HttpPut]
         [Route("password")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordDto dto)
