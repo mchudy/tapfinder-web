@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PubApp.DataAccess.Entities;
+using PubApp.Web.Dtos;
 
 namespace PubApp.Web
 {
@@ -11,7 +13,7 @@ namespace PubApp.Web
 
         protected override void Configure()
         {
-
+            CreateMap<BeerStyle, BeerStyleDto>();
         }
     }
 }

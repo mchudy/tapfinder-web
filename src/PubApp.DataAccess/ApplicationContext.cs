@@ -22,10 +22,13 @@ namespace PubApp.DataAccess
             Database.SetInitializer<ApplicationContext>(null);
         }
 
-        public IDbSet<Place> Places { get; set; }
         public IDbSet<Like> Likes { get; set; }
         public IDbSet<LikeableItem> LikeableItems { get; set; }
         public IDbSet<Comment> Comments { get; set; }
         public IDbSet<SpecialOffer> SpecialOffers { get; set; }
+        public IDbSet<BeerStyle> BeerStyles { get; set; }
+        public IDbSet<Beer> Beers { get; set; }
+        public IDbSet<Brewery> Breweries { get; set; }
+        public IDbSet<PlaceBeer> PlacesBeers { get; set; }
     }
 }

@@ -62,10 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Entities\Beer.cs" />
+    <Compile Include="Entities\BeerStyle.cs" />
+    <Compile Include="Entities\Brewery.cs" />
+    <Compile Include="Entities\PlaceBeer.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Like.cs" />
-    <Compile Include="Entities\LikedItem.cs" />
-    <Compile Include="Entities\Place.cs" />
+    <Compile Include="Entities\LikeableItem.cs" />
     <Compile Include="Entities\SpecialOffer.cs" />
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="DataAccessModule.cs" />

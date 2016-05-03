@@ -17,9 +17,9 @@ namespace PubApp.Web.Infrastructure
             builder.RegisterType<NLogExceptionLogger>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
-            builder.RegisterType<UsersService>()
-                .AsSelf()
-                .InstancePerRequest();
+
+            builder.RegisterType<UsersService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<BeersService>().AsSelf().InstancePerRequest();
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry,
