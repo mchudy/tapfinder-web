@@ -183,8 +183,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Dtos\ExternalLoginDtos.cs" />
-    <Compile Include="Infrastructure\Providers\FacebookAuthProvider.cs" />
-    <Compile Include="Infrastructure\ChallengeResult.cs" />
     <Compile Include="Services\BeersService.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\BeerStyleDto.cs" />
@@ -193,7 +191,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GeoHelper.cs" />
-    <Compile Include="Infrastructure\Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Infrastructure\ApplicationOAuthProvider.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\AppModule.cs" />
     <Compile Include="Infrastructure\IdentityModule.cs" />
