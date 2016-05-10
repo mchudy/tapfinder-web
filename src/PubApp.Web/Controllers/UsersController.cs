@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using PubApp.DataAccess.Entities;
 using PubApp.Web.Dtos;
 using PubApp.Web.Services;
 using System.Threading.Tasks;
@@ -68,5 +70,81 @@ namespace PubApp.Web.Controllers
             }
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("external")]
+        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var verifiedAccessToken = await usersService.VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+            if (verifiedAccessToken == null)
+            {
+                return BadRequest("Invalid Provider or External Access Token");
+            }
+
+            User user = await usersService.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+
+            bool hasRegistered = user != null;
+            if (hasRegistered)
+            {
+                return BadRequest("External user is already registered");
+            }
+
+            user = new User { UserName = model.UserName, Email = model.Email };
+
+            IdentityResult result = await usersService.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(string.Join("\n", result.Errors));
+            }
+
+            var info = new ExternalLoginInfo()
+            {
+                DefaultUserName = model.UserName,
+                Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
+            };
+
+            result = await usersService.AddLoginAsync(user.Id, info.Login);
+            if (!result.Succeeded)
+            {
+                return BadRequest(string.Join("\n", result.Errors));
+            }
+
+            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(model.UserName);
+            return Ok(accessTokenResponse);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("token")]
+        public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken)
+        {
+            if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
+            {
+                return BadRequest("Provider or external access token is not sent");
+            }
+
+            var verifiedAccessToken = await usersService.VerifyExternalAccessToken(provider, externalAccessToken);
+            if (verifiedAccessToken == null)
+            {
+                return BadRequest("Invalid Provider or External Access Token");
+            }
+
+            User user = await usersService.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+            bool hasRegistered = user != null;
+
+            if (!hasRegistered)
+            {
+                return BadRequest("External user is not registered");
+            }
+            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(user.UserName);
+            return Ok(accessTokenResponse);
+        }
+
     }
 }

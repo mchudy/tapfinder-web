@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using PubApp.Web.Infrastructure;
+using PubApp.Web.Providers;
 using System;
 
 namespace PubApp.Web
@@ -11,6 +13,9 @@ namespace PubApp.Web
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
+
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        public static FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
 
         public static void ConfigureAuth(IAppBuilder app)
         {
@@ -26,13 +31,18 @@ namespace PubApp.Web
                 AllowInsecureHttp = true
             };
 
+            app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
+            OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+
             app.UseOAuthBearerTokens(OAuthOptions);
 
-            //TODO
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
-
+            FacebookAuthOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = System.Configuration.ConfigurationManager.AppSettings["FacebookAppId"],
+                AppSecret = System.Configuration.ConfigurationManager.AppSettings["FacebookAppSecret"],
+                Provider = new FacebookAuthProvider()
+            };
+            app.UseFacebookAuthentication(FacebookAuthOptions);
         }
     }
 }
