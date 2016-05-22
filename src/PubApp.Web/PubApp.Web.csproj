@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Dtos\ExternalLoginDtos.cs" />
+    <Compile Include="Filters\RequireHttpAttribute.cs" />
     <Compile Include="Services\BeersService.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\BeerStyleDto.cs" />

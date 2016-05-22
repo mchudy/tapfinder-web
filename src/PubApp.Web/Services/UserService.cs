@@ -126,7 +126,7 @@ namespace PubApp.Web.Services
                                         new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                                         new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
             );
-            return tokenResponse;//.ToString(Formatting.None).Replace("\\", "");
+            return tokenResponse;
         }
     }
 }

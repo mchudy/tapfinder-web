@@ -2,8 +2,8 @@
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using System;
 using PubApp.Web.Infrastructure;
+using System;
 
 namespace PubApp.Web
 {
@@ -24,9 +24,11 @@ namespace PubApp.Web
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-
-                //TODO: Install certificate on the server and disable in release
+#if DEBUG
                 AllowInsecureHttp = true
+#else
+                AllowInsecureHttp = false
+#endif
             };
 
             app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
