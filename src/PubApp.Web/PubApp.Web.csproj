@@ -182,7 +182,13 @@
     <Compile Include="App_Start\MappingsConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BeersController.cs" />
+    <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Dtos\BeerDto.cs" />
+    <Compile Include="Dtos\BreweryDto.cs" />
+    <Compile Include="Dtos\CommentDto.cs" />
     <Compile Include="Dtos\ExternalLoginDtos.cs" />
+    <Compile Include="Dtos\PlaceBeerDto.cs" />
+    <Compile Include="Dtos\SpecialOfferDto.cs" />
     <Compile Include="Services\BeersService.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\BeerStyleDto.cs" />

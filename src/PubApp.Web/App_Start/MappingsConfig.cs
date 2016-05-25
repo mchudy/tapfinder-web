@@ -14,6 +14,17 @@ namespace PubApp.Web
         protected override void Configure()
         {
             CreateMap<BeerStyle, BeerStyleDto>();
+            CreateMap<Beer, BeerDto>()
+                .ForMember(b => b.Style, opt => opt.MapFrom(b => b.Style.Name))
+                .ForMember(b => b.StyleId, opt => opt.MapFrom(b => b.BeerStyleId));
+            CreateMap<Brewery, BreweryDto>();
+            CreateMap<PlaceBeer, PlaceBeerDto>()
+                .ForMember(p => p.UserName, opt => opt.MapFrom(pb => pb.User.UserName))
+                .ForMember(b => b.Rating, opt => opt.Ignore());
+            CreateMap<SpecialOffer, SpecialOfferDto>()
+                .ForMember(s => s.UserName, opt => opt.MapFrom(s => s.User.UserName));
+            CreateMap<Comment, CommentDto>()
+                .ForMember(c => c.UserName, opt => opt.MapFrom(c => c.User.UserName));
         }
     }
 }
