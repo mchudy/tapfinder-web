@@ -20,6 +20,7 @@ namespace PubApp.Web.Infrastructure
 
             builder.RegisterType<UsersService>().AsSelf().InstancePerRequest();
             builder.RegisterType<BeersService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<PlacesService>().AsSelf().InstancePerRequest();
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry,

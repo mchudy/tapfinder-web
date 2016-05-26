@@ -1,5 +1,7 @@
+using AutoMapper.QueryableExtensions;
 using PubApp.DataAccess;
-using PubApp.DataAccess.Entities;
+using PubApp.Web.Dtos;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PubApp.Web.Services
@@ -13,9 +15,11 @@ namespace PubApp.Web.Services
             this.context = context;
         }
 
-        public IQueryable<BeerStyle> GetAllBeerStyles()
+        public IList<BeerStyleDto> GetAllBeerStyles()
         {
-            return context.BeerStyles;
+            return context.BeerStyles
+                .ProjectTo<BeerStyleDto>()
+                .ToList();
         }
     }
 }

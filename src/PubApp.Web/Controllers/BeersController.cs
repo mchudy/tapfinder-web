@@ -1,12 +1,9 @@
-﻿using AutoMapper.QueryableExtensions;
-using PubApp.Web.Dtos;
-using PubApp.Web.Services;
-using System.Linq;
+﻿using PubApp.Web.Services;
 using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("beers")]
     public class BeersController : ApiController
     {
@@ -22,8 +19,7 @@ namespace PubApp.Web.Controllers
         public IHttpActionResult GetAllBeerStyles()
         {
             var styles = service.GetAllBeerStyles();
-            var dtos = styles.ProjectTo<BeerStyleDto>().ToList();
-            return Ok(dtos);
+            return Ok(styles);
         }
     }
 }

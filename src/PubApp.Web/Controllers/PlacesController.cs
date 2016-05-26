@@ -1,23 +1,33 @@
-﻿using System.Web.Http;
+﻿using PubApp.Web.Services;
+using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
-    [Authorize]
-    [RoutePrefix("place")]
+    //[Authorize]
+    [RoutePrefix("places")]
     public class PlacesController : ApiController
     {
+        private readonly PlacesService service;
+
+        public PlacesController(PlacesService service)
+        {
+            this.service = service;
+        }
+
         [HttpGet]
         [Route("{id}/specialoffers")]
         public IHttpActionResult GetSpecialOffers(string id)
         {
-            return Ok();
+            var offers = service.GetSpecialOffers(id);
+            return Ok(offers);
         }
 
         [HttpGet]
         [Route("{id}/beers")]
         public IHttpActionResult GetBeers(string id)
         {
-            return Ok();
+            var beers = service.GetBeers(id);
+            return Ok(beers);
         }
     }
 }

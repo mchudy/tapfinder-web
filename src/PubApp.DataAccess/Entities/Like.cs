@@ -9,7 +9,7 @@ namespace PubApp.DataAccess.Entities
         public int UserId { get; set; }
 
         [Key, Column(Order = 1)]
-        public int LikedItemId { get; set; }
+        public int LikeableItemId { get; set; }
 
         // true for like, false for dislike
         public bool Liked { get; set; }
