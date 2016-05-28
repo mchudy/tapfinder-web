@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using PubApp.Web.Filters;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
@@ -12,6 +14,7 @@ namespace PubApp.Web
 {
     public static class WebApiConfig
     {
+        [SuppressMessage("ReSharper", "UnusedVariable")]
         public static void Configure(IAppBuilder appBuilder, ILifetimeScope container)
         {
             var config = new HttpConfiguration();
@@ -24,6 +27,11 @@ namespace PubApp.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var requireHttpsAttribute = new RequireHttpsAttribute();
+#if !DEBUG
+            config.Filters.Add(requireHttpsAttribute);
+#endif
 
             // return JSON instead of XML by default
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes

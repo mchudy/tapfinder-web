@@ -193,6 +193,7 @@
     <Compile Include="Dtos\ExternalLoginDtos.cs" />
     <Compile Include="Dtos\PlaceBeerDto.cs" />
     <Compile Include="Dtos\SpecialOfferDto.cs" />
+    <Compile Include="Filters\RequireHttpAttribute.cs" />
     <Compile Include="Services\BeersService.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Dtos\BeerStyleDto.cs" />
