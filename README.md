@@ -1,4 +1,5 @@
 IP serwera: 52.28.249.181
+
 URL: [https://tapfinderapp.tk](https://tapfinderapp.tk)
 
 ### Baza
