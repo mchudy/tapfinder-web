@@ -3,7 +3,7 @@ using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [RoutePrefix("places")]
     public class PlacesController : ApiController
     {
