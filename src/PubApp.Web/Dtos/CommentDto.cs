@@ -4,6 +4,7 @@ namespace PubApp.Web.Dtos
 {
     public class CommentDto
     {
+        public string Id { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
         public string PlaceId { get; set; }
