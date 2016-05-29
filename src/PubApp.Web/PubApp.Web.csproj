@@ -201,6 +201,7 @@
     <Compile Include="Dtos\ExternalLoginDtos.cs" />
     <Compile Include="Dtos\PlaceBeerDto.cs" />
     <Compile Include="Dtos\SpecialOfferDto.cs" />
+    <Compile Include="Dtos\UserImageDto.cs" />
     <Compile Include="Filters\RequireHttpAttribute.cs" />
     <Compile Include="Services\BeersService.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Infrastructure\NLogExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dtos\RegisterAccountDto.cs" />
+    <Compile Include="Services\ImageSaver.cs" />
     <Compile Include="Services\PlacesService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />

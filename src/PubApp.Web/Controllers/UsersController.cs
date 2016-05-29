@@ -12,10 +12,12 @@ namespace PubApp.Web.Controllers
     public class UsersController : ApiController
     {
         private readonly UsersService usersService;
+        private readonly ImageSaver imageSaver;
 
-        public UsersController(UsersService usersService)
+        public UsersController(UsersService usersService, ImageSaver imageSaver)
         {
             this.usersService = usersService;
+            this.imageSaver = imageSaver;
         }
 
         [AllowAnonymous]
@@ -53,6 +55,15 @@ namespace PubApp.Web.Controllers
             {
                 return NotFound();
             }
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("image")]
+        public IHttpActionResult ChangeImage(UserImageDto imageDto)
+        {
+            var path = imageSaver.SaveFile(imageDto.Image);
+            usersService.SetImage(User.Identity.GetUserId<int>(), path);
             return Ok();
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
+using PubApp.DataAccess;
 using PubApp.DataAccess.Entities;
 using PubApp.Web.Dtos;
 using PubApp.Web.Infrastructure;
@@ -16,10 +17,12 @@ namespace PubApp.Web.Services
     public class UsersService
     {
         private readonly ApplicationUserManager userManager;
+        private readonly ApplicationContext ctx;
 
-        public UsersService(ApplicationUserManager userManager)
+        public UsersService(ApplicationUserManager userManager, ApplicationContext ctx)
         {
             this.userManager = userManager;
+            this.ctx = ctx;
         }
 
         public async Task<bool> RegisterUser(UserRegisterDto registerData)
@@ -59,6 +62,13 @@ namespace PubApp.Web.Services
         public async Task<IdentityResult> AddLoginAsync(int userId, UserLoginInfo login)
         {
             return await userManager.AddLoginAsync(userId, login);
+        }
+
+        public void SetImage(int userId, string imagePath)
+        {
+            var user = ctx.Users.Find(userId);
+            user.ImagePath = imagePath;
+            ctx.SaveChanges();
         }
 
         public async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)

@@ -21,6 +21,7 @@ namespace PubApp.Web.Infrastructure
             builder.RegisterType<UsersService>().AsSelf().InstancePerRequest();
             builder.RegisterType<BeersService>().AsSelf().InstancePerRequest();
             builder.RegisterType<PlacesService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ImageSaver>().AsSelf().SingleInstance();
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry,
