@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Microsoft.Owin;
+using Microsoft.Owin.StaticFiles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -52,6 +54,12 @@ namespace PubApp.Web
 
             appBuilder.UseAutofacWebApi(config);
             appBuilder.UseWebApi(config);
+
+            appBuilder.UseFileServer(new FileServerOptions
+            {
+                EnableDefaultFiles = false,
+                RequestPath = new PathString("/images")
+            });
         }
     }
 }
