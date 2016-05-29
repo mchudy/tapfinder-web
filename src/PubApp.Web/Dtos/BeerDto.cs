@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public string Style { get; set; }
         public int StyleId { get; set; }
+        public string ImagePath { get; set; }
         public BreweryDto Brewery { get; set; }
     }
 }

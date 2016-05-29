@@ -9,6 +9,8 @@ namespace PubApp.DataAccess.Entities
         IdentityUser<int, AppUserLogin, AppUserRole, AppUserClaim>,
         IUser<int>
     {
+        public string ImagePath { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
             UserManager<User, int> manager, string authenticationType)
         {
