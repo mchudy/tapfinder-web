@@ -1,5 +1,8 @@
-﻿using LinqKit;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using LinqKit;
 using PubApp.DataAccess;
+using PubApp.DataAccess.Entities;
 using PubApp.Web.Dtos;
 using System;
 using System.Collections.Generic;
@@ -64,6 +67,23 @@ namespace PubApp.Web.Services
                     StartDate = s.StartDate,
                     EndDate = s.EndDate
                 })
+                .ToList();
+        }
+
+        public int AddComment(CommentDto dto, int userId)
+        {
+            var comment = ctx.Comments.Add(Mapper.Map<Comment>(dto));
+            comment.Date = DateTime.Now;
+            comment.UserId = userId;
+            ctx.SaveChanges();
+            return comment.Id;
+        }
+
+        public IList<CommentDto> GetComments(string placeId)
+        {
+            return ctx.Comments.Where(c => c.PlaceId == placeId)
+                .OrderByDescending(c => c.Date)
+                .ProjectTo<CommentDto>()
                 .ToList();
         }
 

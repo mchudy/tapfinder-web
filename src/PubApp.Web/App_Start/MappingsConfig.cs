@@ -25,6 +25,7 @@ namespace PubApp.Web
                 .ForMember(s => s.UserName, opt => opt.MapFrom(s => s.User.UserName));
             CreateMap<Comment, CommentDto>()
                 .ForMember(c => c.UserName, opt => opt.MapFrom(c => c.User.UserName));
+            CreateMap<CommentDto, Comment>();
         }
     }
 }

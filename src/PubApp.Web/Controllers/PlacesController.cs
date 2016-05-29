@@ -1,4 +1,6 @@
-﻿using PubApp.Web.Services;
+﻿using Microsoft.AspNet.Identity;
+using PubApp.Web.Dtos;
+using PubApp.Web.Services;
 using System.Web.Http;
 
 namespace PubApp.Web.Controllers
@@ -28,6 +30,23 @@ namespace PubApp.Web.Controllers
         {
             var beers = service.GetBeers(id);
             return Ok(beers);
+        }
+
+        [HttpGet]
+        [Route("{id}/comments")]
+        public IHttpActionResult GetComments(string id)
+        {
+            var comments = service.GetComments(id);
+            return Ok(comments);
+        }
+
+        [HttpPost]
+        [Route("comments")]
+        public IHttpActionResult PostComment(CommentDto dto)
+        {
+            var commentId = service.AddComment(dto, User.Identity.GetUserId<int>());
+            string location = Request.RequestUri + "/" + commentId;
+            return Created(location, commentId);
         }
     }
 }
