@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using PubApp.DataAccess.Entities;
 
 namespace PubApp.Web.Services
 {
@@ -66,6 +67,21 @@ namespace PubApp.Web.Services
                 })
                 .ToList();
         }
+
+        public IList<CommentDto> GetComments(string id)
+        {
+            return ctx.Comments
+                .AsExpandable()
+                .Include(c => c.User)
+                .Where(c => c.PlaceId == id)
+                .Select(c => new CommentDto
+                {
+                    Text = c.Text,
+                    Date = c.Date,
+                    PlaceId = c.PlaceId,
+                    UserName = c.User.UserName
+                }).ToList();
+        } 
 
         private Expression<Func<int, int>> GetRating()
         {

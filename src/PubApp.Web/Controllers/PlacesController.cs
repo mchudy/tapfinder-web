@@ -29,5 +29,13 @@ namespace PubApp.Web.Controllers
             var beers = service.GetBeers(id);
             return Ok(beers);
         }
+        
+        [HttpGet]
+        [Route("{id}/comments")]
+        public IHttpActionResult GetComments(string id)
+        {
+            var comments = service.GetComments(id);
+            return Ok(comments);
+        }
     }
 }
