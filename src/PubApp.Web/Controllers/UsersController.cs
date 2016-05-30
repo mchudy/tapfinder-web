@@ -73,7 +73,7 @@ namespace PubApp.Web.Controllers
         {
             var path = imageSaver.SaveFile(imageDto.Image);
             usersService.SetImage(User.Identity.GetUserId<int>(), path);
-            return Ok(new UserImageDto { Image = path });
+            return Ok(new UserDto { ImagePath = path });
         }
 
         [HttpPut]
