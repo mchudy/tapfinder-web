@@ -3,7 +3,6 @@ using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
-    [Authorize]
     [RoutePrefix("beers")]
     public class BeersController : ApiController
     {
@@ -20,6 +19,14 @@ namespace PubApp.Web.Controllers
         {
             var styles = service.GetAllBeerStyles();
             return Ok(styles);
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult FindBeers(string query)
+        {
+            var beers = service.FindBeers(query);
+            return Ok(beers);
         }
     }
 }

@@ -2,23 +2,38 @@ using AutoMapper.QueryableExtensions;
 using PubApp.DataAccess;
 using PubApp.Web.Dtos;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Web.Http;
 
 namespace PubApp.Web.Services
 {
+    [Authorize]
     public class BeersService
     {
-        private readonly ApplicationContext context;
+        private const int maxSearchResults = 40;
+        private readonly ApplicationContext ctx;
 
-        public BeersService(ApplicationContext context)
+        public BeersService(ApplicationContext ctx)
         {
-            this.context = context;
+            this.ctx = ctx;
         }
 
         public IList<BeerStyleDto> GetAllBeerStyles()
         {
-            return context.BeerStyles
+            return ctx.BeerStyles
                 .ProjectTo<BeerStyleDto>()
+                .ToList();
+        }
+
+        public IList<BeerDto> FindBeers(string query)
+        {
+            return ctx.Beers
+                .Include(b => b.Brewery)
+                .Include(b => b.Style)
+                .Where(b => b.Name.Contains(query) || b.Brewery.Name.Contains(query))
+                .Take(maxSearchResults)
+                .ProjectTo<BeerDto>()
                 .ToList();
         }
     }
