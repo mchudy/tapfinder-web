@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[SpecialOffers] ADD [Title] nvarchar(200) NOT NULL;
