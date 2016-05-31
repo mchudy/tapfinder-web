@@ -25,6 +25,15 @@ namespace PubApp.Web.Controllers
             return Ok(offers);
         }
 
+        [HttpPost]
+        [Route("{id}/specialoffers")]
+        public IHttpActionResult AddSpecialOffer(AddSpecialOfferDto dto)
+        {
+            var offer = service.AddSpecialOffer(dto, User.Identity.GetUserId<int>());
+            string location = Request.RequestUri.ToString();
+            return Created(location, Mapper.Map<SpecialOfferDto>(offer));
+        }
+
         [HttpGet]
         [Route("{id}/beers")]
         public IHttpActionResult GetBeers(string id)

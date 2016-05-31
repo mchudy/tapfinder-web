@@ -23,6 +23,7 @@ namespace PubApp.Web
                 .ForMember(b => b.Rating, opt => opt.Ignore());
             CreateMap<PlaceBeerDto, PlaceBeer>();
             CreateMap<AddPlaceBeerDto, PlaceBeer>();
+            CreateMap<AddSpecialOfferDto, SpecialOffer>();
             CreateMap<SpecialOffer, SpecialOfferDto>()
                 .ForMember(s => s.UserName, opt => opt.MapFrom(s => s.User.UserName));
             CreateMap<Comment, CommentDto>()

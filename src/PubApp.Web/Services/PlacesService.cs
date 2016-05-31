@@ -57,10 +57,11 @@ namespace PubApp.Web.Services
             return ctx.SpecialOffers
                 .AsExpandable()
                 .Include(so => so.User)
-                .Where(so => so.PlaceId == id && so.EndDate < DateTime.Now)
+                .Where(so => so.PlaceId == id && so.EndDate >= DateTime.Now)
                 .Select(s => new SpecialOfferDto
                 {
                     UserName = s.User.UserName,
+                    Title = s.Title,
                     PlaceId = id,
                     Description = s.Description,
                     Rating = ratingExpression.Invoke(s.Id),
@@ -109,6 +110,14 @@ namespace PubApp.Web.Services
             newBeer.AddedDate = DateTime.Now;
             ctx.SaveChanges();
             return Mapper.Map<PlaceBeerDto>(newBeer);
+        }
+
+        public SpecialOfferDto AddSpecialOffer(AddSpecialOfferDto dto, int userId)
+        {
+            var newOffer = ctx.SpecialOffers.Add(Mapper.Map<SpecialOffer>(dto));
+            newOffer.UserId = userId;
+            ctx.SaveChanges();
+            return Mapper.Map<SpecialOfferDto>(newOffer);
         }
     }
 }
