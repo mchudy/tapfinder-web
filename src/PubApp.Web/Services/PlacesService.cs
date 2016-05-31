@@ -93,5 +93,22 @@ namespace PubApp.Web.Services
                 ctx.Likes.Count(l => l.LikeableItemId == id && l.Liked) -
                 ctx.Likes.Count(l => l.LikeableItemId == id && !l.Liked);
         }
+
+        public PlaceBeerDto GetPlaceBeer(int beerId, string placeId)
+        {
+            var placeBeer = ctx.PlacesBeers
+                .FirstOrDefault(pb => pb.BeerId == beerId && pb.PlaceId == placeId);
+            if (placeBeer == null) return null;
+            return Mapper.Map<PlaceBeerDto>(placeBeer);
+        }
+
+        public PlaceBeerDto AddPlaceBeer(AddPlaceBeerDto dto, int userId)
+        {
+            var newBeer = ctx.PlacesBeers.Add(Mapper.Map<PlaceBeer>(dto));
+            newBeer.UserId = userId;
+            newBeer.AddedDate = DateTime.Now;
+            ctx.SaveChanges();
+            return Mapper.Map<PlaceBeerDto>(newBeer);
+        }
     }
 }

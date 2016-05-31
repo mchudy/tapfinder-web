@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using PubApp.Web.Dtos;
 using PubApp.Web.Services;
 using System.Web.Http;
@@ -30,6 +31,20 @@ namespace PubApp.Web.Controllers
         {
             var beers = service.GetBeers(id);
             return Ok(beers);
+        }
+
+        [HttpPost]
+        [Route("{id}/beers")]
+        public IHttpActionResult AddBeerOnTap(AddPlaceBeerDto dto)
+        {
+            var placeBeer = service.GetPlaceBeer(dto.BeerId, dto.PlaceId);
+            if (placeBeer != null)
+            {
+                return Conflict();
+            }
+            placeBeer = service.AddPlaceBeer(dto, User.Identity.GetUserId<int>());
+            string location = Request.RequestUri.ToString();
+            return Created(location, Mapper.Map<PlaceBeerDto>(placeBeer));
         }
 
         [HttpGet]

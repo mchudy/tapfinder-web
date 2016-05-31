@@ -193,6 +193,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\MappingsConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dtos\AddPlaceBeerDto.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Dtos\BeerDto.cs" />
