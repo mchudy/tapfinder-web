@@ -30,6 +30,7 @@ namespace PubApp.Web
                 .ForMember(c => c.UserName, opt => opt.MapFrom(c => c.User.UserName));
             CreateMap<CommentDto, Comment>();
             CreateMap<User, UserDto>();
+            CreateMap<LikeDto, Like>();
         }
     }
 }

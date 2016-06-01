@@ -18,9 +18,11 @@ namespace PubApp.Web.Infrastructure
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.RegisterType<UsersService>().AsSelf().InstancePerRequest();
-            builder.RegisterType<BeersService>().AsSelf().InstancePerRequest();
-            builder.RegisterType<PlacesService>().AsSelf().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(Startup).Assembly)
+                .Where(t => t.Namespace.EndsWith("Services"))
+                .AsSelf()
+                .InstancePerRequest();
+
             builder.RegisterType<ImageSaver>().AsSelf().SingleInstance();
         }
 
