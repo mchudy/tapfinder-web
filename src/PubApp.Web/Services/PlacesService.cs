@@ -33,6 +33,7 @@ namespace PubApp.Web.Services
                 .Where(pb => pb.PlaceId == id)
                 .Select(p => new PlaceBeerDto
                 {
+                    Id = p.Id,
                     AddedDate = p.AddedDate,
                     UserName = p.User.UserName,
                     PlaceId = id,
@@ -60,6 +61,7 @@ namespace PubApp.Web.Services
                 .Where(so => so.PlaceId == id && so.EndDate >= DateTime.Now)
                 .Select(s => new SpecialOfferDto
                 {
+                    Id = s.Id,
                     UserName = s.User.UserName,
                     Title = s.Title,
                     PlaceId = id,

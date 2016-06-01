@@ -4,7 +4,7 @@ namespace PubApp.Web.Dtos
 {
     public class PlaceBeerDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string PlaceId { get; set; }
 
         public string Description { get; set; }
