@@ -205,6 +205,7 @@
     <Compile Include="Dtos\LikeDto.cs" />
     <Compile Include="Dtos\PlaceBeerDto.cs" />
     <Compile Include="Dtos\PlacesWithBeerSearchResultDto.cs" />
+    <Compile Include="Dtos\RankingDto.cs" />
     <Compile Include="Dtos\SpecialOfferDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Dtos\UserImageDto.cs" />

@@ -5,7 +5,8 @@ using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
-    [RoutePrefix("likes")]
+    [Authorize]
+    [RoutePrefix("")]
     public class LikesController : ApiController
     {
         private readonly LikesService service;
@@ -15,8 +16,20 @@ namespace PubApp.Web.Controllers
             this.service = service;
         }
 
+        [HttpGet]
+        [Route("rating")]
+        public IHttpActionResult GetRating([FromUri] int itemId)
+        {
+            var dto = service.GetRating(itemId);
+            if (dto == null)
+            {
+                return BadRequest();
+            }
+            return Ok(dto);
+        }
+
         [HttpPut]
-        [Route("")]
+        [Route("likes")]
         public IHttpActionResult UpdateLike(LikeDto dto)
         {
             if (service.UpdateLike(dto, User.Identity.GetUserId<int>()))

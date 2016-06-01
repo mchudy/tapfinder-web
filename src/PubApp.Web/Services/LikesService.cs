@@ -35,5 +35,16 @@ namespace PubApp.Web.Services
             ctx.SaveChanges();
             return true;
         }
+
+        public RatingDto GetRating(int itemId)
+        {
+            if (ctx.LikeableItems.Find(itemId) == null)
+            {
+                return null;
+            }
+            int rating = ctx.Likes.Count(l => l.LikeableItemId == itemId) -
+                   ctx.Likes.Count(l => !l.Liked);
+            return new RatingDto { Id = itemId, Rating = rating };
+        }
     }
 }
