@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using PubApp.Web.Dtos;
 using PubApp.Web.Services;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace PubApp.Web.Controllers
@@ -71,6 +72,14 @@ namespace PubApp.Web.Controllers
             var commentId = service.AddComment(dto, User.Identity.GetUserId<int>());
             string location = Request.RequestUri + "/" + commentId;
             return Created(location, commentId);
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public IHttpActionResult FindPlacesWithBeer(int beerStyleId, decimal maxPrice, [FromUri] IList<string> placesIds)
+        {
+            var placesBeers = service.GetPlacesWithBeer(beerStyleId, maxPrice, placesIds);
+            return Ok(placesBeers);
         }
     }
 }

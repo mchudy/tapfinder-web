@@ -119,5 +119,23 @@ namespace PubApp.Web.Services
             ctx.SaveChanges();
             return Mapper.Map<SpecialOfferDto>(newOffer);
         }
+
+        public IList<PlacesWithBeerSearchResultDto> GetPlacesWithBeer(int beerStyleId, decimal maxPrice, IList<string> placesIds)
+        {
+            return ctx.PlacesBeers
+                .Include(p => p.Beer)
+                .Include(p => p.User)
+                .Include(p => p.Beer.Brewery)
+                .Include(p => p.Beer.Style)
+                .Where(p => placesIds.Contains(p.PlaceId) && p.Beer.Style.Id == beerStyleId && p.Price <= maxPrice)
+                .ToList()
+                .GroupBy(pb => pb.PlaceId)
+                .Select(g => new PlacesWithBeerSearchResultDto
+                {
+                    PlaceId = g.Key,
+                    Beers = g.AsQueryable().ProjectTo<PlaceBeerDto>().ToList()
+                })
+                .ToList();
+        }
     }
 }
