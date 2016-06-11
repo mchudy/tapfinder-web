@@ -45,7 +45,15 @@ namespace PubApp.Web.Services
                 .Include(b => b.Brewery)
                 .Include(b => b.Style)
                 .SingleOrDefault(b => b.Id == id);
-            return Mapper.Map<BeerDetailsDto>(beer);
+            var dto = Mapper.Map<BeerDetailsDto>(beer);
+            if (dto != null)
+            {
+                dto.Places = ctx.PlacesBeers
+                    .Where(pb => pb.BeerId == id)
+                    .ProjectTo<PlaceWithBeerDto>()
+                    .ToList();
+            }
+            return dto;
         }
     }
 }
