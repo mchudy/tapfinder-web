@@ -17,6 +17,9 @@ namespace PubApp.Web
             CreateMap<Beer, BeerDto>()
                 .ForMember(b => b.Style, opt => opt.MapFrom(b => b.Style.Name))
                 .ForMember(b => b.StyleId, opt => opt.MapFrom(b => b.BeerStyleId));
+            CreateMap<Beer, BeerDetailsDto>()
+                .ForMember(b => b.Style, opt => opt.MapFrom(b => b.Style.Name))
+                .ForMember(b => b.StyleId, opt => opt.MapFrom(b => b.BeerStyleId));
             CreateMap<Brewery, BreweryDto>();
             CreateMap<PlaceBeer, PlaceBeerDto>()
                 .ForMember(p => p.UserName, opt => opt.MapFrom(pb => pb.User.UserName))

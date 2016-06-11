@@ -1,3 +1,4 @@
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using PubApp.DataAccess;
 using PubApp.Web.Dtos;
@@ -36,6 +37,12 @@ namespace PubApp.Web.Services
                 .Take(maxSearchResults)
                 .ProjectTo<BeerDto>()
                 .ToList();
+        }
+
+        public BeerDetailsDto GetBeerDetails(int id)
+        {
+            var beer = ctx.Beers.Find(id);
+            return Mapper.Map<BeerDetailsDto>(beer);
         }
     }
 }

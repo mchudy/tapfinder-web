@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using PubApp.DataAccess.Entities;
 
 namespace PubApp.Web.Services
 {
@@ -41,7 +40,6 @@ namespace PubApp.Web.Services
                     Beer = new BeerDto
                     {
                         Brewery = new BreweryDto { Id = p.Beer.BreweryId, Name = p.Beer.Brewery.Name },
-                        Description = p.Beer.Description,
                         Id = p.BeerId,
                         Name = p.Beer.Name,
                         Style = p.Beer.Style.Name,

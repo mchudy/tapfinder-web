@@ -14,6 +14,18 @@ namespace PubApp.Web.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
+        public IHttpActionResult GetBeerDetails(int id)
+        {
+            var beer = service.GetBeerDetails(id);
+            if (beer == null)
+            {
+                return NotFound();
+            }
+            return Ok(beer);
+        }
+
+        [HttpGet]
         [Route("styles")]
         public IHttpActionResult GetAllBeerStyles()
         {
