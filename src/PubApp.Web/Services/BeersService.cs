@@ -22,6 +22,7 @@ namespace PubApp.Web.Services
         public IList<BeerStyleDto> GetAllBeerStyles()
         {
             return ctx.BeerStyles
+                .OrderBy(b => b.Name)
                 .ProjectTo<BeerStyleDto>()
                 .ToList();
         }
