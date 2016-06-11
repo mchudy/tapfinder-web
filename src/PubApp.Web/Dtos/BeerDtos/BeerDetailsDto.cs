@@ -1,13 +1,8 @@
 ﻿namespace PubApp.Web.Dtos
 {
-    public class BeerDetailsDto
+    public class BeerDetailsDto : BeerDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
-        public string Style { get; set; }
-        public int StyleId { get; set; }
         public string ImagePath { get; set; }
-        public BreweryDto Brewery { get; set; }
     }
 }

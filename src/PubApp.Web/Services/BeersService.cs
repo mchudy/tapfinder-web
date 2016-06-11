@@ -41,7 +41,10 @@ namespace PubApp.Web.Services
 
         public BeerDetailsDto GetBeerDetails(int id)
         {
-            var beer = ctx.Beers.Find(id);
+            var beer = ctx.Beers
+                .Include(b => b.Brewery)
+                .Include(b => b.Style)
+                .SingleOrDefault(b => b.Id == id);
             return Mapper.Map<BeerDetailsDto>(beer);
         }
     }
