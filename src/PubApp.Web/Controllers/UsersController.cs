@@ -135,7 +135,7 @@ namespace PubApp.Web.Controllers
                 return BadRequest(string.Join("\n", result.Errors));
             }
 
-            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(model.UserName);
+            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(model.UserName, user.Id);
             return Ok(accessTokenResponse);
         }
 
@@ -162,7 +162,7 @@ namespace PubApp.Web.Controllers
             {
                 return BadRequest("External user is not registered");
             }
-            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(user.UserName);
+            var accessTokenResponse = usersService.GenerateLocalAccessTokenResponse(user.UserName, user.Id);
             return Ok(accessTokenResponse);
         }
 

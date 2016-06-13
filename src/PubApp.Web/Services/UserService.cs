@@ -112,11 +112,12 @@ namespace PubApp.Web.Services
             return parsedToken;
         }
 
-        public dynamic GenerateLocalAccessTokenResponse(string userName)
+        public dynamic GenerateLocalAccessTokenResponse(string userName, int userId)
         {
             var tokenExpiration = TimeSpan.FromDays(14);
 
             ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId.ToString()));
             identity.AddClaim(new Claim(ClaimTypes.Name, userName));
             identity.AddClaim(new Claim("role", "user"));
 
