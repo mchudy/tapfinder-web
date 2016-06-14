@@ -198,6 +198,7 @@
     <Compile Include="Dtos\AddPlaceBeerDto.cs" />
     <Compile Include="Controllers\BeersController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Dtos\BadgeDto.cs" />
     <Compile Include="Dtos\BeerDtos\BeerDetailsDto.cs" />
     <Compile Include="Dtos\BeerDtos\BeerDto.cs" />
     <Compile Include="Dtos\BeerDtos\BreweryDto.cs" />
