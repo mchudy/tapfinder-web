@@ -30,5 +30,7 @@ namespace PubApp.DataAccess
         public IDbSet<Beer> Beers { get; set; }
         public IDbSet<Brewery> Breweries { get; set; }
         public IDbSet<PlaceBeer> PlacesBeers { get; set; }
+        public IDbSet<Badge> Badges { get; set; }
+        public IDbSet<Rank> Ranks { get; set; }
     }
 }
