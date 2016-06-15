@@ -8,5 +8,6 @@ namespace PubApp.Web.Dtos
         public string ImagePath { get; set; }
         public RankDto Rank { get; set; }
         public IList<BadgeDto> Badges { get; set; }
+        public int Experience { get; set; }
     }
 }

@@ -35,6 +35,8 @@ namespace PubApp.Web
             CreateMap<CommentDto, Comment>();
             CreateMap<User, UserDto>();
             CreateMap<LikeDto, Like>();
+            CreateMap<Rank, RankDto>();
+            CreateMap<Badge, BadgeDto>();
         }
     }
 }
