@@ -15,6 +15,18 @@ namespace PubApp.Web.Controllers
             this.service = service;
         }
 
+        [HttpHead]
+        [Route("places")]
+        public IHttpActionResult CheckIfIsFavorite([FromUri] string placeId)
+        {
+            int userId = User.Identity.GetUserId<int>();
+            if (service.UserFavoriteExists(userId, placeId))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
         [HttpPost]
         [Route("places")]
         public IHttpActionResult AddFavouritePlace([FromUri] string placeId)

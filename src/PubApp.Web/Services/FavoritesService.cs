@@ -35,7 +35,7 @@ namespace PubApp.Web.Services
             return true;
         }
 
-        private bool UserFavoriteExists(int userId, string placeId)
+        public bool UserFavoriteExists(int userId, string placeId)
         {
             return (ctx.UsersFavouritePlaces.FirstOrDefault(up => up.UserId == userId &&
                                                                   up.PlaceId == placeId) != null);
