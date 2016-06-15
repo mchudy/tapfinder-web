@@ -33,7 +33,8 @@ namespace PubApp.Web
             CreateMap<Comment, CommentDto>()
                 .ForMember(c => c.UserName, opt => opt.MapFrom(c => c.User.UserName));
             CreateMap<CommentDto, Comment>();
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>()
+                .ForMember(u => u.FavouritePlaces, opt => opt.Ignore());
             CreateMap<LikeDto, Like>();
             CreateMap<Rank, RankDto>();
             CreateMap<Badge, BadgeDto>();

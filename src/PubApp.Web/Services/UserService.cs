@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
@@ -35,6 +36,16 @@ namespace PubApp.Web.Services
                 Rank = ctx.Ranks.OrderBy(r => r.MinExperience).First(),
                 Experience = 0
             };
+        }
+
+        public UserDto GetUser(string username)
+        {
+            var user = userManager.FindByName(username);
+            var dto = Mapper.Map<UserDto>(user);
+            dto.FavouritePlaces = ctx.UsersFavouritePlaces.Where(up => up.UserId == user.Id)
+                .Select(up => up.PlaceId)
+                .ToList();
+            return dto;
         }
 
         public async Task<bool> RegisterUser(UserRegisterDto registerData)

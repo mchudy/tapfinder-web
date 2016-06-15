@@ -32,6 +32,7 @@ namespace PubApp.DataAccess
         public IDbSet<PlaceBeer> PlacesBeers { get; set; }
         public IDbSet<Badge> Badges { get; set; }
         public IDbSet<Rank> Ranks { get; set; }
+        public IDbSet<UserFavouritePlace> UsersFavouritePlaces { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

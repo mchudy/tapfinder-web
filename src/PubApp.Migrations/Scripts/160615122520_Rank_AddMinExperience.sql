@@ -1,6 +1,7 @@
 ALTER TABLE [dbo].[Ranks] 
 ADD [MinExperience] int NOT NULL DEFAULT 0;
 
+GO
 UPDATE [dbo].[Ranks] SET [MinExperience] = 0 
 WHERE [Id] = 1;
 

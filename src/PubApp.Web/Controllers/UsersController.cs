@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using PubApp.DataAccess.Entities;
 using PubApp.Web.Dtos;
@@ -61,10 +60,10 @@ namespace PubApp.Web.Controllers
 
         [HttpGet]
         [Route("{username}")]
-        public async Task<IHttpActionResult> GetUser(string username)
+        public IHttpActionResult GetUser(string username)
         {
-            var user = await usersService.FindByName(username);
-            return Ok(Mapper.Map<UserDto>(user));
+            var user = usersService.GetUser(username);
+            return Ok(user);
         }
 
         [HttpPut]

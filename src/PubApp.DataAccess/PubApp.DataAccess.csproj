@@ -72,6 +72,7 @@
     <Compile Include="Entities\Like.cs" />
     <Compile Include="Entities\LikeableItem.cs" />
     <Compile Include="Entities\SpecialOffer.cs" />
+    <Compile Include="Entities\UserFavouritePlace.cs" />
     <Compile Include="IdentityConfig.cs" />
     <Compile Include="DataAccessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
