@@ -1,3 +1,4 @@
+GO
 ALTER TABLE [dbo].[Ranks] 
 ADD [MinExperience] int NOT NULL DEFAULT 0;
 
