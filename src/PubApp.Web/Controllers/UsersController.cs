@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace PubApp.Web.Controllers
 {
+    [Authorize]
     [RoutePrefix("users")]
     public class UsersController : ApiController
     {
