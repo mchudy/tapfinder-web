@@ -148,7 +148,7 @@ namespace PubApp.Web.Services
         {
             var user = ctx.Users.Find(userId);
             user.Experience += newExperience;
-            var rank = ctx.Ranks.Where(r => r.MinExperience >= user.Experience)
+            var rank = ctx.Ranks.Where(r => user.Experience >= r.MinExperience)
                 .OrderByDescending(r => r.MinExperience)
                 .FirstOrDefault();
             user.Rank = rank;
