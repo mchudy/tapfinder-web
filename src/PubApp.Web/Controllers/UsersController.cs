@@ -115,7 +115,7 @@ namespace PubApp.Web.Controllers
                 return BadRequest("External user is already registered");
             }
 
-            user = new User { UserName = model.UserName, Email = model.Email };
+            user = usersService.GetNewUser(model.UserName, model.Email);
 
             IdentityResult result = await usersService.CreateAsync(user);
             if (!result.Succeeded)

@@ -26,15 +26,20 @@ namespace PubApp.Web.Services
             this.ctx = ctx;
         }
 
-        public async Task<bool> RegisterUser(UserRegisterDto registerData)
+        public User GetNewUser(string userName, string email)
         {
-            var user = new User
+            return new User
             {
-                UserName = registerData.UserName,
-                Email = registerData.Email,
+                UserName = userName,
+                Email = email,
                 Rank = ctx.Ranks.OrderBy(r => r.MinExperience).First(),
                 Experience = 0
             };
+        }
+
+        public async Task<bool> RegisterUser(UserRegisterDto registerData)
+        {
+            var user = GetNewUser(registerData.UserName, registerData.Email);
             IdentityResult result = await userManager.CreateAsync(user, registerData.Password);
             return result.Succeeded;
         }
