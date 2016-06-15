@@ -93,7 +93,7 @@
     <EmbeddedResource Include="Scripts\160614203716_AddPopulateBadges.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\160614225955_AlterUsersTable.sql" />
+    <EmbeddedResource Include="Scripts\160614225955_AlterUsersTable.sql" />
     <EmbeddedResource Include="Scripts\160615122520_Rank_AddMinExperience.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
