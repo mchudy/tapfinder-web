@@ -20,11 +20,13 @@ namespace PubApp.Web.Services
     {
         private readonly ApplicationUserManager userManager;
         private readonly ApplicationContext ctx;
+        private readonly BadgesService badgesService;
 
-        public UsersService(ApplicationUserManager userManager, ApplicationContext ctx)
+        public UsersService(ApplicationUserManager userManager, ApplicationContext ctx, BadgesService badgesService)
         {
             this.userManager = userManager;
             this.ctx = ctx;
+            this.badgesService = badgesService;
         }
 
         public User GetNewUser(string userName, string email)
@@ -54,8 +56,7 @@ namespace PubApp.Web.Services
             IdentityResult result = await userManager.CreateAsync(user, registerData.Password);
             if (result.Succeeded)
             {
-                user.Badges.Add(ctx.Badges.Find(1));
-                ctx.SaveChanges();
+                badgesService.AddInitialBadge(user);
             }
             return result.Succeeded;
         }

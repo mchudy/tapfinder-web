@@ -14,11 +14,13 @@ namespace PubApp.Web.Controllers
     {
         private readonly UsersService usersService;
         private readonly ImageSaver imageSaver;
+        private readonly BadgesService badgesService;
 
-        public UsersController(UsersService usersService, ImageSaver imageSaver)
+        public UsersController(UsersService usersService, ImageSaver imageSaver, BadgesService badgesService)
         {
             this.usersService = usersService;
             this.imageSaver = imageSaver;
+            this.badgesService = badgesService;
         }
 
         [AllowAnonymous]
@@ -124,7 +126,7 @@ namespace PubApp.Web.Controllers
             {
                 return BadRequest(string.Join("\n", result.Errors));
             }
-
+            badgesService.AddInitialBadge(user);
             var info = new ExternalLoginInfo()
             {
                 DefaultUserName = model.UserName,

@@ -1,4 +1,5 @@
 ﻿using PubApp.DataAccess;
+using PubApp.DataAccess.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,8 @@ namespace PubApp.Web.Services
 {
     public class BadgesService
     {
+        private const int InitialBadgeId = 1;
+
         private const int FirstBeerBadgeId = 2;
         private const int FirstSpecialOfferBadgeId = 3;
         private const int TenSpecialOffersBadgeId = 4;
@@ -28,6 +31,13 @@ namespace PubApp.Web.Services
         public BadgesService(ApplicationContext ctx)
         {
             this.ctx = ctx;
+        }
+
+        public void AddInitialBadge(User user)
+        {
+            var badge = ctx.Badges.Find(InitialBadgeId);
+            user.Badges.Add(badge);
+            ctx.SaveChanges();
         }
 
         public void UpdateBeerBadges(int userId)
