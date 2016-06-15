@@ -14,6 +14,9 @@ namespace PubApp.Web.Services
 {
     public class PlacesService
     {
+        public const int AddBeerExperience = 10;
+        public const int AddSpecialOfferExperience = 25;
+
         private readonly ApplicationContext ctx;
         private readonly Expression<Func<int, int>> ratingExpression;
 
@@ -109,6 +112,7 @@ namespace PubApp.Web.Services
             var newBeer = ctx.PlacesBeers.Add(Mapper.Map<PlaceBeer>(dto));
             newBeer.UserId = userId;
             newBeer.AddedDate = DateTime.Now;
+            UpdateExperience(userId, AddBeerExperience);
             ctx.SaveChanges();
             return Mapper.Map<PlaceBeerDto>(newBeer);
         }
@@ -117,6 +121,7 @@ namespace PubApp.Web.Services
         {
             var newOffer = ctx.SpecialOffers.Add(Mapper.Map<SpecialOffer>(dto));
             newOffer.UserId = userId;
+            UpdateExperience(userId, AddSpecialOfferExperience);
             ctx.SaveChanges();
             return Mapper.Map<SpecialOfferDto>(newOffer);
         }
@@ -137,6 +142,16 @@ namespace PubApp.Web.Services
                     Beers = g.AsQueryable().ProjectTo<PlaceBeerDto>().ToList()
                 })
                 .ToList();
+        }
+
+        private void UpdateExperience(int userId, int newExperience)
+        {
+            var user = ctx.Users.Find(userId);
+            user.Experience += newExperience;
+            var rank = ctx.Ranks.Where(r => r.MinExperience >= user.Experience)
+                .OrderByDescending(r => r.MinExperience)
+                .FirstOrDefault();
+            user.Rank = rank;
         }
     }
 }

@@ -8,6 +8,7 @@ using PubApp.Web.Dtos;
 using PubApp.Web.Infrastructure;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,7 +28,13 @@ namespace PubApp.Web.Services
 
         public async Task<bool> RegisterUser(UserRegisterDto registerData)
         {
-            var user = new User { UserName = registerData.UserName, Email = registerData.Email };
+            var user = new User
+            {
+                UserName = registerData.UserName,
+                Email = registerData.Email,
+                Rank = ctx.Ranks.OrderBy(r => r.MinExperience).First(),
+                Experience = 0
+            };
             IdentityResult result = await userManager.CreateAsync(user, registerData.Password);
             return result.Succeeded;
         }
