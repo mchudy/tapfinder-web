@@ -32,5 +32,18 @@ namespace PubApp.DataAccess
         public IDbSet<PlaceBeer> PlacesBeers { get; set; }
         public IDbSet<Badge> Badges { get; set; }
         public IDbSet<Rank> Ranks { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasMany(s => s.Badges)
+                .WithMany()
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserId");
+                    cs.MapRightKey("BadgeId");
+                    cs.ToTable("UsersBadges");
+                });
+        }
     }
 }

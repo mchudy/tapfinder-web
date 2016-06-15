@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@ namespace PubApp.DataAccess.Entities
 
         public int RankId { get; set; }
         public virtual Rank Rank { get; set; }
+
+        public virtual ICollection<Badge> Badges { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
             UserManager<User, int> manager, string authenticationType)
