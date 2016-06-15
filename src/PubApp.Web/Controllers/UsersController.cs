@@ -37,6 +37,7 @@ namespace PubApp.Web.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpHead]
         [Route("")]
         public async Task<IHttpActionResult> CheckUsernameAvailability([FromUri] string username)
@@ -48,6 +49,7 @@ namespace PubApp.Web.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpHead]
         [Route("")]
         public async Task<IHttpActionResult> CheckEmailAvailability([FromUri] string email)

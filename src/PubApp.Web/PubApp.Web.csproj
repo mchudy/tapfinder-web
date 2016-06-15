@@ -194,6 +194,7 @@
     <Compile Include="App_Start\MappingsConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FavoritesController.cs" />
+    <Compile Include="Services\BadgesService.cs" />
     <Compile Include="Services\FavoritesService.cs" />
     <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Dtos\AddSpecialOfferDto.cs" />

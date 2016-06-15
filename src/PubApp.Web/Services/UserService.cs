@@ -52,6 +52,11 @@ namespace PubApp.Web.Services
         {
             var user = GetNewUser(registerData.UserName, registerData.Email);
             IdentityResult result = await userManager.CreateAsync(user, registerData.Password);
+            if (result.Succeeded)
+            {
+                user.Badges.Add(ctx.Badges.Find(1));
+                ctx.SaveChanges();
+            }
             return result.Succeeded;
         }
 

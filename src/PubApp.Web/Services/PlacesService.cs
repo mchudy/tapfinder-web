@@ -18,11 +18,13 @@ namespace PubApp.Web.Services
         public const int AddSpecialOfferExperience = 25;
 
         private readonly ApplicationContext ctx;
+        private readonly BadgesService badgesService;
         private readonly Expression<Func<int, int>> ratingExpression;
 
-        public PlacesService(ApplicationContext ctx)
+        public PlacesService(ApplicationContext ctx, BadgesService badgesService)
         {
             this.ctx = ctx;
+            this.badgesService = badgesService;
             ratingExpression = GetRating();
         }
 
@@ -113,6 +115,7 @@ namespace PubApp.Web.Services
             newBeer.UserId = userId;
             newBeer.AddedDate = DateTime.Now;
             UpdateExperience(userId, AddBeerExperience);
+            badgesService.UpdateBeerBadges(userId);
             ctx.SaveChanges();
             return Mapper.Map<PlaceBeerDto>(newBeer);
         }
@@ -122,6 +125,7 @@ namespace PubApp.Web.Services
             var newOffer = ctx.SpecialOffers.Add(Mapper.Map<SpecialOffer>(dto));
             newOffer.UserId = userId;
             UpdateExperience(userId, AddSpecialOfferExperience);
+            badgesService.UpdateSpecialOfferBadges(userId);
             ctx.SaveChanges();
             return Mapper.Map<SpecialOfferDto>(newOffer);
         }

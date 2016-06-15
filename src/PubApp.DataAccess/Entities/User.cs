@@ -16,7 +16,7 @@ namespace PubApp.DataAccess.Entities
         public int RankId { get; set; }
         public virtual Rank Rank { get; set; }
 
-        public virtual ICollection<Badge> Badges { get; set; }
+        public virtual ICollection<Badge> Badges { get; set; } = new HashSet<Badge>();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
             UserManager<User, int> manager, string authenticationType)
