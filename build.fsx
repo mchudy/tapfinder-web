@@ -10,14 +10,14 @@ let deployDir = "./deploy"
 let buildDir = "./build"
 let testDir   = "./test"
 
-let webConfig = "src/PubApp.Web/Web.config"
-let releaseWebConfig = "src/PubApp.Web/Web.Release.config"
-let migrationsAppConfig = "src/PubApp.Migrations/App.config"
-let transformedAppConfig = buildDir + "/PubApp.Migrations.exe.config"
+let webConfig = "src/TapFinder.Web/Web.config"
+let releaseWebConfig = "src/TapFinder.Web/Web.Release.config"
+let migrationsAppConfig = "src/TapFinder.Migrations/App.config"
+let transformedAppConfig = buildDir + "/TapFinder.Migrations.exe.config"
 let transformedConfig = buildDir + "/Web.config"
 let defaultConnectionString = "DbConnection"
 
-let migrationsProgram = buildDir + "/PubApp.Migrations.exe"
+let migrationsProgram = buildDir + "/TapFinder.Migrations.exe"
 
 let awsDeploy = findToolInSubPath "awsDeploy.bat" "tools"
 let cttTool = findToolInSubPath "ctt.exe" "tools"
@@ -54,7 +54,7 @@ Target "BuildApp" (fun _ ->
 )
 
 Target "Test" (fun _ ->
-      !! (testDir + "/PubApp.*Tests.dll")
+      !! (testDir + "/TapFinder.*Tests.dll")
         |> xUnit2 (fun p ->
             {p with
                 ShadowCopy = false;
@@ -82,7 +82,7 @@ Target "Deploy" (fun _ ->
     ensureDirectory deployDir
 
     trace "Copying site files"
-    CopyRecursive (joinPaths buildDir "_PublishedWebsites/PubApp.Web") deployDir true |> ignore
+    CopyRecursive (joinPaths buildDir "_PublishedWebsites/TapFinder.Web") deployDir true |> ignore
 
     trace "Copying tools and misc files"
     deploymentMisc  |> CopyTo deployDir
