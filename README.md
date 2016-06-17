@@ -1,27 +1,21 @@
-IP serwera: 52.28.249.181
+#TapFinder
 
-URL: [https://tapfinderapp.tk](https://tapfinderapp.tk)
+This repository contains the backend for [TapFinder Android app](http://github.com/mchudy/tapfinder).
 
-### Baza
-Stworzenie LocalDb:
+### Installation
+By default TapFinder in Debug mode uses LocalDb. If you want to use it, first create the database:
 ```
 sqllocaldb create pubapp
 sqllocaldb start pubapp
 sqlcmd -S "(localdb)\pubapp" -Q "create database pubapp"
+``` 
+and then run migrations:
 ```
-
-### Migracje
-Polecenia w Package Manager Console:
+.\build.cmd migrate
 ```
-new-migration [Name]
+To build the project from the command line run:
 ```
-Uruchomienie migracji do LocalDb:
-```
-start-migrations
-```
-lub lepiej z cmd (builduje i uruchamia testy wczesniej)
-```
-./build.cmd migrate
+.\build.cmd
 ```
 
 ## License
